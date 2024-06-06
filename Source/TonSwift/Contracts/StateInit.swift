@@ -7,11 +7,11 @@ import BigInt
 //  library:(HashmapE 256 SimpleLib) = StateInit;
 
 public struct StateInit: CellCodable {
-    var splitDepth: UInt32?
-    var special: TickTock?
-    var code: Cell?
-    var data: Cell?
-    var libraries: [UInt256: SimpleLibrary]
+    public var splitDepth: UInt32?
+    public var special: TickTock?
+    public var code: Cell?
+    public var data: Cell?
+    public var libraries: [UInt256: SimpleLibrary]
 
     init(splitDepth: UInt32? = nil,
          special: TickTock? = nil,
@@ -66,16 +66,16 @@ public struct StateInit: CellCodable {
 // Source: https://github.com/ton-blockchain/ton/blob/24dc184a2ea67f9c47042b4104bbb4d82289fac1/crypto/block/block.tlb#L139
 // tick_tock$_ tick:Bool tock:Bool = TickTock;
 
-struct TickTock: CellCodable {
+public struct TickTock: CellCodable {
     var tick: Bool
     var tock: Bool
     
-    func storeTo(builder: Builder) throws {
+    public func storeTo(builder: Builder) throws {
         try builder.store(bit: self.tick)
         try builder.store(bit: self.tock)
     }
     
-    static func loadFrom(slice: Slice) throws -> TickTock {
+    public static func loadFrom(slice: Slice) throws -> TickTock {
         return TickTock(
             tick: try slice.loadBoolean(),
             tock: try slice.loadBoolean()
